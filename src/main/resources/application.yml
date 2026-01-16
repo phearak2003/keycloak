@@ -1,9 +1,23 @@
 server:
   port: 8080
 
+springdoc:
+  swagger-ui:
+    path: /swagger
+
+keycloak:
+  auth-server-url: http://localhost:9090
+  realm: my-realm
+  admin:
+    client-id: spring-boot-app
+    client-secret: O29w7o8NWkJiJ39imrbTYZmupUxVHftN
+
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:9090/realms/realmdev
+          # The issuer URL (Keycloak)
+          issuer-uri: http://localhost:9090/realms/my-realm
+          # URL to fetch the JSON Web Key Set (JWK)
+          jwk-set-uri: http://localhost:9090/realms/my-realm/protocol/openid-connect/certs
